@@ -2,24 +2,30 @@
 .stack 100h
 .code
 main proc
-    ; Read a character
-            mov ah, 1h
-            int 21h
+    ; Read a single character from keyboard (with echo)
+    mov ah, 1h
+    int 21h             ; AL = input character
     
-            cmp al, 'y'
-            je  DISPLAY
-            cmp al, 'Y'
-            je  DISPLAY
-            jmp EXIT
+    ; Compare input character with 'y'
+    cmp al, 'y'
+    je DISPLAY          ; If equal, jump to DISPLAY
     
-    DISPLAY:
-    ; Print the character
-            mov ah, 2h
-            mov dl, al
-            int 21h
+    ; Compare input character with 'Y'
+    cmp al, 'Y'
+    je DISPLAY          ; If equal, jump to DISPLAY
     
-    EXIT:   
-            mov ah, 4Ch
-            int 21h
+    ; If character is not 'y' or 'Y', exit program
+    jmp EXIT
+    
+DISPLAY:
+    ; Print the character stored in AL
+    mov ah, 2h
+    mov dl, al          ; DL = character to print
+    int 21h             ; DOS function to print char
+    
+EXIT:
+    ; Terminate the program and return control to DOS
+    mov ah, 4Ch
+    int 21h
 main endp
 end main
