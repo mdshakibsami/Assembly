@@ -4,7 +4,9 @@
 ; str1 dw 'Enter number(0-9): $'
 str1 db "Enter number(0-9)$"
 even_msg db 0ah, 0dh,'Result is: Even$'
-odd_msg db 0ah, 0dh,'Result is: Odd$'    
+odd_msg db 0ah, 0dh,'Result is: Odd$' 
+
+
 num dw ?
 .code
 main:
